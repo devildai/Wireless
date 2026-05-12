@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EX 751 — Wireless Communication Study Plan | TU IOE</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0D0F14;
+  --surface: #13161D;
+  --surface2: #1A1E28;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.14);
+  --text: #E8EBF2;
+  --muted: #6B7280;
+  --muted2: #9CA3AF;
+  --signal: #00E5A0;
+  --signal-dim: rgba(0,229,160,0.12);
+  --signal-dim2: rgba(0,229,160,0.06);
+  --amber: #F59E0B;
+  --amber-dim: rgba(245,158,11,0.12);
+  --red: #EF4444;
+  --red-dim: rgba(239,68,68,0.1);
+  --blue: #60A5FA;
+  --blue-dim: rgba(96,165,250,0.1);
+  --purple: #A78BFA;
+  --purple-dim: rgba(167,139,250,0.1);
+  --pink: #F472B6;
+  --pink-dim: rgba(244,114,182,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Syne',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-size:15px;
+  line-height:1.7;
+  min-height:100vh;
+}
+
+/* GRID NOISE */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(13,15,20,0.9);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;
+}
+.nav-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  height:56px;
+}
+.nav-logo{
+  font-family:'Space Mono',monospace;
+  font-size:0.85rem;font-weight:700;
+  color:var(--signal);
+  text-decoration:none;
+  letter-spacing:1px;
+}
+.nav-logo span{color:var(--muted2);}
+.nav-links{display:flex;gap:0;list-style:none;}
+.nav-links a{
+  text-decoration:none;color:var(--muted);
+  font-size:0.78rem;font-weight:500;
+  padding:0.35rem 0.85rem;border-radius:6px;
+  transition:all 0.15s;letter-spacing:0.3px;
+}
+.nav-links a:hover{color:var(--signal);background:var(--signal-dim2);}
+.nav-badge{
+  font-family:'Space Mono',monospace;
+  font-size:0.7rem;color:var(--amber);
+  border:1px solid rgba(245,158,11,0.3);
+  padding:2px 10px;border-radius:4px;
+  background:var(--amber-dim);
+}
+
+/* HERO */
+.hero{
+  position:relative;z-index:1;
+  padding:5rem 2rem 4rem;
+  max-width:1200px;margin:0 auto;
+  border-bottom:1px solid var(--border);
+}
+.hero-top{
+  display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:2rem;
+  margin-bottom:2.5rem;
+}
+.hero-tag{
+  font-family:'Space Mono',monospace;
+  font-size:0.72rem;letter-spacing:2.5px;
+  color:var(--signal);
+  text-transform:uppercase;
+  margin-bottom:1rem;
+  display:flex;align-items:center;gap:8px;
+}
+.hero-tag::before{
+  content:'';width:24px;height:1px;background:var(--signal);
+}
+.hero h1{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2.2rem,5vw,4rem);
+  font-weight:400;line-height:1.12;
+  color:var(--text);
+  max-width:700px;
+}
+.hero h1 em{
+  font-style:italic;color:var(--signal);
+}
+.hero-meta{
+  display:flex;flex-direction:column;gap:8px;
+  align-items:flex-end;
+  padding-top:1rem;
+}
+.meta-pill{
+  font-family:'Space Mono',monospace;
+  font-size:0.7rem;padding:4px 14px;
+  border-radius:4px;white-space:nowrap;
+  border:1px solid;
+}
+.hero-desc{
+  font-size:1rem;color:var(--muted2);
+  max-width:600px;line-height:1.8;
+  margin-bottom:2.5rem;
+  font-weight:400;
+}
+.hero-stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+}
+.hstat{
+  background:var(--surface);
+  padding:1.2rem 1.5rem;
+  text-align:center;
+}
+.hstat-n{
+  font-family:'DM Serif Display',serif;
+  font-size:2rem;color:var(--signal);
+  line-height:1;
+}
+.hstat-l{
+  font-size:0.78rem;color:var(--muted);
+  margin-top:4px;
+}
+
+/* SECTION WRAPPER */
+.section-wrap{
+  position:relative;z-index:1;
+  max-width:1200px;margin:0 auto;
+  padding:4rem 2rem;
+  border-bottom:1px solid var(--border);
+}
+.section-head{
+  display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;
+  gap:1rem;margin-bottom:2.5rem;
+}
+.sh-left{}
+.sh-tag{
+  font-family:'Space Mono',monospace;
+  font-size:0.7rem;letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:0.5rem;
+  display:flex;align-items:center;gap:6px;
+}
+.sh-tag::before{content:'//'; opacity:0.5;}
+.section-head h2{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.6rem,3vw,2.2rem);
+  font-weight:400;color:var(--text);
+  line-height:1.2;
+}
+.sh-desc{
+  font-size:0.9rem;color:var(--muted);
+  max-width:480px;line-height:1.7;
+  margin-top:0.5rem;
+}
+
+/* CHAPTERS GRID */
+.chapters-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:1.5px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+}
+.ch-card{
+  background:var(--surface);
+  padding:1.6rem;
+  transition:background 0.15s;
+  cursor:default;
+}
+.ch-card:hover{background:var(--surface2);}
+.ch-top{
+  display:flex;align-items:center;
+  justify-content:space-between;
+  margin-bottom:1rem;
+}
+.ch-num{
+  font-family:'Space Mono',monospace;
+  font-size:0.7rem;
+  color:var(--muted);
+  border:1px solid var(--border2);
+  padding:2px 8px;border-radius:4px;
+  background:rgba(255,255,255,0.03);
+}
+.ch-freq{
+  font-family:'Space Mono',monospace;
+  font-size:0.65rem;
+  padding:2px 8px;border-radius:4px;
+}
+.ch-card h3{
+  font-size:1rem;font-weight:700;
+  color:var(--text);margin-bottom:0.4rem;
+}
+.ch-card .sub{
+  font-size:0.82rem;color:var(--muted);
+  margin-bottom:1rem;line-height:1.6;
+}
+.ch-topics{
+  display:flex;flex-wrap:wrap;gap:5px;
+  margin-bottom:1.2rem;
+}
+.topic-tag{
+  font-size:0.72rem;
+  padding:3px 9px;border-radius:4px;
+  font-weight:500;
+}
+.ch-bar-wrap{margin-top:auto;}
+.ch-bar-label{
+  display:flex;justify-content:space-between;
+  font-size:0.72rem;color:var(--muted);
+  margin-bottom:5px;
+}
+.ch-bar{
+  height:3px;background:rgba(255,255,255,0.06);
+  border-radius:100px;overflow:hidden;
+}
+.ch-bar-fill{
+  height:100%;border-radius:100px;
+  transition:width 0.5s ease;
+}
+.past-qs{
+  margin-top:1rem;
+  padding-top:1rem;
+  border-top:1px solid var(--border);
+}
+.past-qs-label{
+  font-family:'Space Mono',monospace;
+  font-size:0.65rem;color:var(--muted);
+  letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:0.5rem;
+}
+.pq-item{
+  font-size:0.8rem;color:var(--muted2);
+  line-height:1.55;
+  padding:5px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  display:flex;gap:8px;align-items:flex-start;
+}
+.pq-item:last-child{border-bottom:none;}
+.pq-year{
+  font-family:'Space Mono',monospace;
+  font-size:0.65rem;color:var(--signal);
+  flex-shrink:0;padding-top:1px;
+}
+
+/* SCHEDULE TABLE */
+.sched-outer{
+  border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;
+}
+.sched-table{width:100%;border-collapse:collapse;min-width:700px;}
+.sched-wrap{overflow-x:auto;}
+.sched-table thead tr{background:rgba(0,229,160,0.08);}
+.sched-table thead th{
+  padding:0.9rem 1.2rem;
+  font-family:'Space Mono',monospace;
+  font-size:0.7rem;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--signal);
+  text-align:left;
+  border-bottom:1px solid var(--border2);
+}
+.sched-table tbody tr{border-bottom:1px solid var(--border);}
+.sched-table tbody tr:last-child{border-bottom:none;}
+.sched-table tbody tr:hover{background:rgba(255,255,255,0.02);}
+.sched-table td{
+  padding:0.9rem 1.2rem;
+  vertical-align:top;
+  font-size:0.85rem;
+}
+.day-cell .day{font-weight:700;color:var(--text);font-size:0.9rem;}
+.day-cell .daysub{
+  font-family:'Space Mono',monospace;
+  font-size:0.65rem;color:var(--muted);
+  margin-top:2px;
+}
+.badge{
+  display:inline-block;
+  font-size:0.72rem;font-weight:600;
+  padding:3px 9px;border-radius:4px;
+  margin:2px 2px 2px 0;white-space:nowrap;
+}
+.focus-cell{color:var(--muted2);line-height:1.8;}
+
+/* FORMULA CARDS */
+.formula-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:1rem;
+}
+.formula-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.4rem;
+  position:relative;
+  overflow:hidden;
+}
+.formula-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:2px;
+}
+.formula-card h4{
+  font-size:0.88rem;font-weight:700;
+  color:var(--text);margin-bottom:0.6rem;
+}
+.formula-block{
+  font-family:'Space Mono',monospace;
+  font-size:0.85rem;color:var(--signal);
+  background:var(--signal-dim2);
+  border:1px solid rgba(0,229,160,0.15);
+  padding:0.7rem 1rem;border-radius:6px;
+  margin-bottom:0.7rem;
+  line-height:1.6;
+}
+.formula-note{
+  font-size:0.78rem;color:var(--muted);
+  line-height:1.6;
+}
+
+/* TESTING */
+.testing-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:1rem;
+}
+.test-card{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.4rem;
+  background:var(--surface);
+}
+.test-card .tc-icon{
+  font-size:1.4rem;margin-bottom:0.8rem;
+}
+.test-card h4{font-weight:700;color:var(--text);margin-bottom:0.4rem;}
+.test-card p{font-size:0.82rem;color:var(--muted);line-height:1.65;margin-bottom:0.8rem;}
+.test-steps{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.test-steps li{
+  font-size:0.8rem;color:var(--muted2);
+  display:flex;gap:8px;align-items:flex-start;
+  padding:5px 9px;
+  background:rgba(255,255,255,0.03);
+  border-radius:5px;
+  border:1px solid var(--border);
+  line-height:1.5;
+}
+
+/* EXAM ANALYSIS */
+.analysis-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1.5rem;
+}
+@media(max-width:700px){
+  .analysis-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .hero-meta{align-items:flex-start;}
+  .techniques-layout{grid-template-columns:1fr !important;}
+  .memory-cols{grid-template-columns:1fr !important;}
+}
+.analysis-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.4rem;
+}
+.analysis-card h4{
+  font-weight:700;color:var(--text);
+  margin-bottom:1rem;
+  display:flex;align-items:center;gap:8px;
+  font-size:0.9rem;
+}
+.rank-row{
+  display:flex;align-items:center;gap:10px;
+  padding:6px 0;
+  border-bottom:1px solid var(--border);
+}
+.rank-row:last-child{border-bottom:none;}
+.rank-n{
+  font-family:'Space Mono',monospace;
+  font-size:0.7rem;color:var(--muted);
+  width:20px;
+}
+.rank-label{font-size:0.83rem;color:var(--muted2);flex:1;}
+.rank-bar-wrap{width:80px;}
+.rank-bar{height:4px;background:rgba(255,255,255,0.06);border-radius:100px;overflow:hidden;}
+.rank-fill{height:100%;border-radius:100px;}
+.rank-count{
+  font-family:'Space Mono',monospace;
+  font-size:0.68rem;color:var(--muted);
+  width:30px;text-align:right;
+}
+
+/* IMPORTANT QS */
+.iq-section{
+  border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;
+  margin-bottom:1.5rem;
+}
+.iq-header{
+  background:rgba(255,255,255,0.03);
+  padding:0.9rem 1.4rem;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.iq-header h3{font-size:0.88rem;font-weight:700;color:var(--text);}
+.iq-body{padding:1rem 1.4rem;}
+.iq-item{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  font-size:0.83rem;color:var(--muted2);
+  line-height:1.55;
+}
+.iq-item:last-child{border-bottom:none;}
+.iq-mark{
+  font-family:'Space Mono',monospace;
+  font-size:0.65rem;
+  padding:2px 7px;border-radius:3px;
+  flex-shrink:0;margin-top:1px;
+}
+.iq-stars{
+  color:var(--amber);font-size:0.7rem;
+  flex-shrink:0;padding-top:1px;
+  letter-spacing:1px;
+}
+
+/* PRIORITY TABLE */
+.priority-row{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1.5fr;
+  gap:1rem;
+  padding:0.75rem 1.2rem;
+  border-bottom:1px solid var(--border);
+  font-size:0.83rem;
+  align-items:center;
+}
+.priority-row.hd{
+  font-family:'Space Mono',monospace;
+  font-size:0.65rem;letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--muted);
+  background:rgba(255,255,255,0.02);
+}
+.priority-row:last-child{border-bottom:none;}
+.pstatus{
+  font-size:0.72rem;font-weight:600;
+  padding:3px 9px;border-radius:4px;
+}
+
+/* TIPS */
+.tips-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:1rem;
+}
+.tip-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.4rem;
+}
+.tip-n{
+  font-family:'DM Serif Display',serif;
+  font-size:2.5rem;opacity:0.1;
+  line-height:1;margin-bottom:0.5rem;
+  color:var(--text);
+}
+.tip-card h4{font-weight:700;color:var(--text);margin-bottom:0.4rem;font-size:0.88rem;}
+.tip-card p{font-size:0.82rem;color:var(--muted);line-height:1.65;}
+
+/* FOOTER */
+footer{
+  position:relative;z-index:1;
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  padding:2rem 2rem;
+  text-align:center;
+  font-size:0.82rem;color:var(--muted);
+}
+footer strong{color:var(--signal);}
+
+/* COLORS */
+.c-signal{color:var(--signal);}
+.c-amber{color:var(--amber);}
+.c-red{color:var(--red);}
+.c-blue{color:var(--blue);}
+.c-purple{color:var(--purple);}
+.c-pink{color:var(--pink);}
+.c-muted{color:var(--muted2);}
+
+.bg-signal{background:var(--signal-dim);color:var(--signal);}
+.bg-amber{background:var(--amber-dim);color:var(--amber);}
+.bg-red{background:var(--red-dim);color:var(--red);}
+.bg-blue{background:var(--blue-dim);color:var(--blue);}
+.bg-purple{background:var(--purple-dim);color:var(--purple);}
+.bg-pink{background:var(--pink-dim);color:var(--pink);}
+
+.border-signal{border-color:rgba(0,229,160,0.3);}
+.border-amber{border-color:rgba(245,158,11,0.3);}
+.border-red{border-color:rgba(239,68,68,0.3);}
+.border-blue{border-color:rgba(96,165,250,0.3);}
+.border-purple{border-color:rgba(167,139,250,0.3);}
+
+/* ACCORDION / COLLAPSIBLE */
+details{
+  border:1px solid var(--border);
+  border-radius:10px;overflow:hidden;
+  margin-bottom:0.75rem;
+}
+summary{
+  padding:0.9rem 1.2rem;
+  cursor:pointer;
+  font-weight:600;font-size:0.88rem;
+  color:var(--text);
+  list-style:none;
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--surface);
+  transition:background 0.15s;
+  user-select:none;
+}
+summary:hover{background:var(--surface2);}
+summary::after{
+  content:'＋';color:var(--muted);font-size:0.8rem;
+  transition:transform 0.2s;
+}
+details[open] summary::after{content:'－';}
+.detail-body{
+  padding:1rem 1.4rem;
+  background:rgba(13,15,20,0.6);
+  font-size:0.85rem;color:var(--muted2);
+  line-height:1.8;
+  border-top:1px solid var(--border);
+}
+.detail-body ul{
+  padding-left:1.2rem;
+  display:flex;flex-direction:column;gap:4px;
+}
+.detail-body li{line-height:1.6;}
+.detail-body strong{color:var(--text);font-weight:600;}
+.detail-body .formula-inline{
+  font-family:'Space Mono',monospace;
+  font-size:0.82rem;color:var(--signal);
+  background:var(--signal-dim2);
+  padding:2px 8px;border-radius:4px;
+  display:inline-block;margin:2px 0;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">EX751<span>·WIRELESS</span></a>
+    <ul class="nav-links">
+      <li><a href="#chapters">Chapters</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#important">Important Qs</a></li>
+      <li><a href="#formulas">Formulas</a></li>
+      <li><a href="#testing">Self-Test</a></li>
+      <li><a href="#tips">Tips</a></li>
+    </ul>
+    <span class="nav-badge">TU IOE · 4th Year · BEX/BEI</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div style="position:relative;z-index:1;">
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-tag">Wireless Communication — EX 751</div>
+      <h1>Your <em>complete</em><br>exam prep plan.</h1>
+      <p class="hero-desc">Built from 10+ years of TU IOE past papers (2070–2079). Every chapter ranked by exam frequency. Every important question identified. Every key formula compiled.</p>
+    </div>
+    <div class="hero-meta">
+      <span class="meta-pill bg-signal border-signal">Full Marks: 80</span>
+      <span class="meta-pill bg-amber border-amber">Pass Marks: 32</span>
+      <span class="meta-pill" style="background:var(--blue-dim);color:var(--blue);border-color:rgba(96,165,250,0.3)">Time: 3 hrs</span>
+      <span class="meta-pill" style="background:var(--purple-dim);color:var(--purple);border-color:rgba(167,139,250,0.3)">Year/Part: IV/II</span>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n">8</div><div class="hstat-l">Chapters to cover</div></div>
+    <div class="hstat"><div class="hstat-n">10+</div><div class="hstat-l">Years of past papers analyzed</div></div>
+    <div class="hstat"><div class="hstat-n">~35</div><div class="hstat-l">Recurring question patterns</div></div>
+    <div class="hstat"><div class="hstat-n">3</div><div class="hstat-l">High-frequency chapters</div></div>
+    <div class="hstat"><div class="hstat-n">4</div><div class="hstat-l">Calculations you must know</div></div>
+  </div>
+</div>
+</div>
+
+<!-- EXAM ANALYSIS -->
+<div class="section-wrap" id="analysis">
+  <div class="section-head">
+    <div class="sh-left">
+      <div class="sh-tag c-amber">Past Paper Analysis</div>
+      <h2>What gets asked, every year</h2>
+      <p class="sh-desc">Based on TU IOE Wireless papers from 2070 to 2079. These patterns don't change much — study accordingly.</p>
+    </div>
+  </div>
+  <div class="analysis-grid">
+    <div class="analysis-card">
+      <h4><span style="color:var(--red)">●</span> Most frequently asked topics (2070–2079)</h4>
+      <div class="rank-row"><span class="rank-n">1</span><span class="rank-label">Cellular generations (1G→5G)</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:100%;background:var(--red)"></div></div></div><span class="rank-count c-muted">10/10</span></div>
+      <div class="rank-row"><span class="rank-n">2</span><span class="rank-label">GSM channels + architecture</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:90%;background:var(--red)"></div></div></div><span class="rank-count c-muted">9/10</span></div>
+      <div class="rank-row"><span class="rank-n">3</span><span class="rank-label">FDMA/TDMA/CDMA comparison</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:90%;background:var(--red)"></div></div></div><span class="rank-count c-muted">9/10</span></div>
+      <div class="rank-row"><span class="rank-n">4</span><span class="rank-label">Propagation models (Hata/Okumura)</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:85%;background:var(--amber)"></div></div></div><span class="rank-count c-muted">8/10</span></div>
+      <div class="rank-row"><span class="rank-n">5</span><span class="rank-label">Erlang B/C trunking calculations</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:85%;background:var(--amber)"></div></div></div><span class="rank-count c-muted">8/10</span></div>
+      <div class="rank-row"><span class="rank-n">6</span><span class="rank-label">Small-scale fading factors</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:80%;background:var(--amber)"></div></div></div><span class="rank-count c-muted">8/10</span></div>
+      <div class="rank-row"><span class="rank-n">7</span><span class="rank-label">RAKE receiver / Diversity</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:75%;background:var(--signal)"></div></div></div><span class="rank-count c-muted">7/10</span></div>
+      <div class="rank-row"><span class="rank-n">8</span><span class="rank-label">OFDM transmitter/receiver</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:75%;background:var(--signal)"></div></div></div><span class="rank-count c-muted">7/10</span></div>
+      <div class="rank-row"><span class="rank-n">9</span><span class="rank-label">Speech coding / Vocoder / LPC</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:70%;background:var(--signal)"></div></div></div><span class="rank-count c-muted">7/10</span></div>
+      <div class="rank-row"><span class="rank-n">10</span><span class="rank-label">Coherence bandwidth & delay spread</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:65%;background:var(--blue)"></div></div></div><span class="rank-count c-muted">6/10</span></div>
+    </div>
+    <div class="analysis-card">
+      <h4><span style="color:var(--signal)">●</span> Chapter weight in typical exam (80 marks)</h4>
+      <div class="rank-row"><span class="rank-n">Ch1</span><span class="rank-label">Introduction & Cellular Generations</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:60%;background:var(--amber)"></div></div></div><span class="rank-count c-muted">6–8</span></div>
+      <div class="rank-row"><span class="rank-n">Ch2</span><span class="rank-label">Cellular Concepts & System Design</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:90%;background:var(--red)"></div></div></div><span class="rank-count c-muted">10–14</span></div>
+      <div class="rank-row"><span class="rank-n">Ch3</span><span class="rank-label">Radio Propagation</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:85%;background:var(--red)"></div></div></div><span class="rank-count c-muted">10–14</span></div>
+      <div class="rank-row"><span class="rank-n">Ch4</span><span class="rank-label">Modulation (QPSK/OFDM/SS)</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:60%;background:var(--amber)"></div></div></div><span class="rank-count c-muted">6–10</span></div>
+      <div class="rank-row"><span class="rank-n">Ch5</span><span class="rank-label">Equalization & Diversity</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:65%;background:var(--amber)"></div></div></div><span class="rank-count c-muted">6–10</span></div>
+      <div class="rank-row"><span class="rank-n">Ch6</span><span class="rank-label">Speech & Channel Coding</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:55%;background:var(--signal)"></div></div></div><span class="rank-count c-muted">6–8</span></div>
+      <div class="rank-row"><span class="rank-n">Ch7</span><span class="rank-label">Multiple Access (FDMA/TDMA/CDMA)</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:90%;background:var(--red)"></div></div></div><span class="rank-count c-muted">10–14</span></div>
+      <div class="rank-row"><span class="rank-n">Ch8</span><span class="rank-label">GSM System</span><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:85%;background:var(--red)"></div></div></div><span class="rank-count c-muted">8–12</span></div>
+      <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <p style="font-size:0.8rem;color:var(--muted);">⚡ <strong style="color:var(--text)">3 chapters dominate:</strong> Ch2 (Cellular), Ch7 (Multiple Access), and Ch8 (GSM) together account for ~35–40 marks. Master these first.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER BREAKDOWN -->
+<div class="section-wrap" id="chapters">
+  <div class="section-head">
+    <div class="sh-left">
+      <div class="sh-tag c-signal">Chapter Guide</div>
+      <h2>Chapter-by-chapter breakdown</h2>
+      <p class="sh-desc">What each chapter covers, how often it appears, and which specific subtopics to prioritise.</p>
+    </div>
+  </div>
+  <div class="chapters-grid">
+
+    <!-- CH1 -->
+    <div class="ch-card">
+      <div class="ch-top">
+        <span class="ch-num">CHAPTER 01</span>
+        <span class="ch-freq bg-amber" style="border:1px solid rgba(245,158,11,0.3)">High freq.</span>
+      </div>
+      <h3>Introduction & Evolution of Cellular Systems</h3>
+      <p class="sub">Covers the historical progression from 1G to 5G, standardisation, and the fundamental driving factors of wireless system development.</p>
+      <div class="ch-topics">
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">1G→5G evolution</span>
+        <span class="topic-tag bg-amber" style="border:1px solid rgba(245,158,11,0.3)">2G vs 3G vs 4G</span>
+        <span class="topic-tag bg-signal" style="border:1px solid rgba(0,229,160,0.3)">5G features</span>
+        <span class="topic-tag bg-blue" style="border:1px solid rgba(96,165,250,0.3)">Spectrum Management</span>
+      </div>
+      <div class="ch-bar-wrap">
+        <div class="ch-bar-label"><span>Exam frequency</span><span class="c-amber">Very High</span></div>
+        <div class="ch-bar"><div class="ch-bar-fill" style="width:95%;background:var(--amber)"></div></div>
+      </div>
+      <div class="past-qs">
+        <div class="past-qs-label">Recent exam questions</div>
+        <div class="pq-item"><span class="pq-year">2079</span>Define forward and reverse channel. How will 5G differ from 4G?</div>
+        <div class="pq-item"><span class="pq-year">2078</span>Discuss features introduced from 2nd to 5th generation of cellular systems.</div>
+        <div class="pq-item"><span class="pq-year">2077</span>What are the different features of 4G other than 3G?</div>
+        <div class="pq-item"><span class="pq-year">2076</span>Describe evolution of wireless communication from 1G to 4G.</div>
+      </div>
+    </div>
+
+    <!-- CH2 -->
+    <div class="ch-card">
+      <div class="ch-top">
+        <span class="ch-num">CHAPTER 02</span>
+        <span class="ch-freq bg-red" style="border:1px solid rgba(239,68,68,0.3)">★ Must Know</span>
+      </div>
+      <h3>Cellular Concepts & System Design</h3>
+      <p class="sub">The mathematical and engineering core: frequency reuse, co-channel interference, trunking efficiency, handoff, and cell planning. <em style="color:var(--amber)">Calculations are compulsory.</em></p>
+      <div class="ch-topics">
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">Erlang B/C calc.</span>
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">Frequency reuse / Q ratio</span>
+        <span class="topic-tag bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Handoff strategies</span>
+        <span class="topic-tag bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Cell splitting & sectoring</span>
+        <span class="topic-tag bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Microcell zone concept</span>
+        <span class="topic-tag bg-blue" style="border:1px solid rgba(96,165,250,0.3)">Market penetration</span>
+      </div>
+      <div class="ch-bar-wrap">
+        <div class="ch-bar-label"><span>Exam frequency</span><span class="c-red">Critical</span></div>
+        <div class="ch-bar"><div class="ch-bar-fill" style="width:100%;background:var(--red)"></div></div>
+      </div>
+      <div class="past-qs">
+        <div class="past-qs-label">Recent exam questions</div>
+        <div class="pq-item"><span class="pq-year">2079</span>System A has 394 cells with 19 channels each. Find users supported at 2% blocking (Erlang B calc).</div>
+        <div class="pq-item"><span class="pq-year">2078</span>Explain handover process. Write about practical handover considerations.</div>
+        <div class="pq-item"><span class="pq-year">2074</span>For a 7-cell reuse, find the minimum distance between co-channel cells. Area = 23 sq km.</div>
+        <div class="pq-item"><span class="pq-year">2073</span>Explain microcell zone concept. Why is it needed?</div>
+      </div>
+    </div>
+
+    <!-- CH3 -->
+    <div class="ch-card">
+      <div class="ch-top">
+        <span class="ch-num">CHAPTER 03</span>
+        <span class="ch-freq bg-red" style="border:1px solid rgba(239,68,68,0.3)">★ Must Know</span>
+      </div>
+      <h3>Radio Wave Propagation</h3>
+      <p class="sub">Free space path loss, two-ray model, Okumura-Hata model, fading types (large-scale vs small-scale), Doppler shift, coherence bandwidth and time.</p>
+      <div class="ch-topics">
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">Hata/Okumura model</span>
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">Small-scale fading factors</span>
+        <span class="topic-tag bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Free-space path loss</span>
+        <span class="topic-tag bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Two-ray model</span>
+        <span class="topic-tag bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Coherence BW + Time</span>
+        <span class="topic-tag bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Doppler shift</span>
+        <span class="topic-tag bg-blue" style="border:1px solid rgba(96,165,250,0.3)">Delay spread / RMS</span>
+        <span class="topic-tag bg-purple" style="border:1px solid rgba(167,139,250,0.3)">Rayleigh vs Rician</span>
+      </div>
+      <div class="ch-bar-wrap">
+        <div class="ch-bar-label"><span>Exam frequency</span><span class="c-red">Critical</span></div>
+        <div class="ch-bar"><div class="ch-bar-fill" style="width:100%;background:var(--red)"></div></div>
+      </div>
+      <div class="past-qs">
+        <div class="past-qs-label">Recent exam questions</div>
+        <div class="pq-item"><span class="pq-year">2079</span>What is frequency selective fading? Explain coherence bandwidth and delay spread relationship.</div>
+        <div class="pq-item"><span class="pq-year">2078</span>Free-space: receiver 10 km from 50W transmitter at 900 MHz. Find Pr, E-field, rms voltage, flux density.</div>
+        <div class="pq-item"><span class="pq-year">2076</span>Derive path loss using two-ray model. Estimate reverse link distance using Okumura model.</div>
+        <div class="pq-item"><span class="pq-year">2073</span>Estimate max cell radius using Hata Model: BS=50W, min Pr=-91 dBm, 900 MHz.</div>
+      </div>
+    </div>
+
+    <!-- CH4 -->
+    <div class="ch-card">
+      <div class="ch-top">
+        <span class="ch-num">CHAPTER 04</span>
+        <span class="ch-freq bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Medium-High</span>
+      </div>
+      <h3>Modulation Techniques</h3>
+      <p class="sub">Covers digital modulation for wireless: phase-shift keying variants, frequency-based techniques, spread spectrum, and OFDM — the backbone of modern wireless systems.</p>
+      <div class="ch-topics">
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">OFDM (transmitter diagram)</span>
+        <span class="topic-tag bg-amber" style="border:1px solid rgba(245,158,11,0.3)">QPSK / OQPSK / π/4-QPSK</span>
+        <span class="topic-tag bg-amber" style="border:1px solid rgba(245,158,11,0.3)">MSK / GMSK</span>
+        <span class="topic-tag bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Spread Spectrum / FHSS</span>
+        <span class="topic-tag bg-blue" style="border:1px solid rgba(96,165,250,0.3)">M-ary QAM vs PSK</span>
+      </div>
+      <div class="ch-bar-wrap">
+        <div class="ch-bar-label"><span>Exam frequency</span><span class="c-amber">High</span></div>
+        <div class="ch-bar"><div class="ch-bar-fill" style="width:75%;background:var(--amber)"></div></div>
+      </div>
+      <div class="past-qs">
+        <div class="past-qs-label">Recent exam questions</div>
+        <div class="pq-item"><span class="pq-year">2079</span>Explain OFDM transmitter in brief.</div>
+        <div class="pq-item"><span class="pq-year">2079</span>Define spread spectrum. Explain frequency hopping with diagram.</div>
+        <div class="pq-item"><span class="pq-year">2077</span>Why do we need M-ary QAM? Compare 16-QAM and 16-PSK using constellation diagram.</div>
+        <div class="pq-item"><span class="pq-year">2075</span>Explain transmission and detection of QPSK modulation technique.</div>
+      </div>
+    </div>
+
+    <!-- CH5 -->
+    <div class="ch-card">
+      <div class="ch-top">
+        <span class="ch-num">CHAPTER 05</span>
+        <span class="ch-freq bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Medium-High</span>
+      </div>
+      <h3>Equalization & Diversity</h3>
+      <p class="sub">Equalizers combat ISI; diversity combats fading. Know the types, combining methods, and RAKE receiver in detail — these appear in almost every exam.</p>
+      <div class="ch-topics">
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">RAKE Receiver (M-branch)</span>
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">Space/Time/Freq Diversity</span>
+        <span class="topic-tag bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Adaptive Equalization (LMS/MLSE)</span>
+        <span class="topic-tag bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Combining: MRC, EGC, SC</span>
+        <span class="topic-tag bg-blue" style="border:1px solid rgba(96,165,250,0.3)">MSE algorithm & weights</span>
+      </div>
+      <div class="ch-bar-wrap">
+        <div class="ch-bar-label"><span>Exam frequency</span><span class="c-amber">High</span></div>
+        <div class="ch-bar"><div class="ch-bar-fill" style="width:78%;background:var(--amber)"></div></div>
+      </div>
+      <div class="past-qs">
+        <div class="past-qs-label">Recent exam questions</div>
+        <div class="pq-item"><span class="pq-year">2079</span>Determine the optimal solution of weights using MSE algorithm with derivation.</div>
+        <div class="pq-item"><span class="pq-year">2078</span>Compare feedback and maximum ratio combining in antenna diversity.</div>
+        <div class="pq-item"><span class="pq-year">2077</span>What do you understand by RAKE Receiver? Explain M-branch RAKE receiver.</div>
+        <div class="pq-item"><span class="pq-year">2076</span>Explain how diversity improves network quality. Explain RAKE receiver with block diagram.</div>
+      </div>
+    </div>
+
+    <!-- CH6 -->
+    <div class="ch-card">
+      <div class="ch-top">
+        <span class="ch-num">CHAPTER 06</span>
+        <span class="ch-freq bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Medium freq.</span>
+      </div>
+      <h3>Speech & Channel Coding</h3>
+      <p class="sub">Speech signal characteristics, vocoder types (formant, LPC), channel coding basics including Hadamard codes and convolutional coding.</p>
+      <div class="ch-topics">
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">Speech signal characteristics</span>
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">Vocoder / LPC coder</span>
+        <span class="topic-tag bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Hadamard code (8×8)</span>
+        <span class="topic-tag bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Waveform vs voice coding</span>
+        <span class="topic-tag bg-blue" style="border:1px solid rgba(96,165,250,0.3)">GSM CODEC</span>
+      </div>
+      <div class="ch-bar-wrap">
+        <div class="ch-bar-label"><span>Exam frequency</span><span class="c-signal">Medium</span></div>
+        <div class="ch-bar"><div class="ch-bar-fill" style="width:68%;background:var(--signal)"></div></div>
+      </div>
+      <div class="past-qs">
+        <div class="past-qs-label">Recent exam questions</div>
+        <div class="pq-item"><span class="pq-year">2079</span>Write steps to satisfy Hadamard code. Construct 8×8 Hadamard code.</div>
+        <div class="pq-item"><span class="pq-year">2078</span>Why we need speech coding? Explain the basic concept of VOCODER.</div>
+        <div class="pq-item"><span class="pq-year">2077</span>Discuss the different characteristics of speech signal.</div>
+        <div class="pq-item"><span class="pq-year">2074</span>What is a VOCODER? Explain any two predictive coders.</div>
+      </div>
+    </div>
+
+    <!-- CH7 -->
+    <div class="ch-card">
+      <div class="ch-top">
+        <span class="ch-num">CHAPTER 07</span>
+        <span class="ch-freq bg-red" style="border:1px solid rgba(239,68,68,0.3)">★ Must Know</span>
+      </div>
+      <h3>Multiple Access Techniques</h3>
+      <p class="sub">FDMA, TDMA, CDMA, FHMA — comparisons, advantages/disadvantages, near-far effect, calculations. A numerical on FDMA channel count appears in almost every exam.</p>
+      <div class="ch-topics">
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">FDMA channel calc.</span>
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">CDMA encoding/decoding</span>
+        <span class="topic-tag bg-amber" style="border:1px solid rgba(245,158,11,0.3)">FHMA operation</span>
+        <span class="topic-tag bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Near-far effect & mitigation</span>
+        <span class="topic-tag bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Hybrid SS techniques</span>
+        <span class="topic-tag bg-blue" style="border:1px solid rgba(96,165,250,0.3)">FDMA vs TDMA vs CDMA</span>
+      </div>
+      <div class="ch-bar-wrap">
+        <div class="ch-bar-label"><span>Exam frequency</span><span class="c-red">Critical</span></div>
+        <div class="ch-bar"><div class="ch-bar-fill" style="width:100%;background:var(--red)"></div></div>
+      </div>
+      <div class="past-qs">
+        <div class="past-qs-label">Recent exam questions (VERY repeating)</div>
+        <div class="pq-item"><span class="pq-year">2079/2078/2077</span>Calculate number of channels in FDMA: Total BW=12.8 MHz, guard=10 kHz, channel=30 kHz.</div>
+        <div class="pq-item"><span class="pq-year">2079</span>Illustrate encoding and decoding mechanism of CDMA system in brief.</div>
+        <div class="pq-item"><span class="pq-year">2078</span>Compare between FDMA and TDMA. Explain operation of FHMA.</div>
+        <div class="pq-item"><span class="pq-year">2076</span>Explain near-far effect. State all possible near-far effect mitigation techniques.</div>
+      </div>
+    </div>
+
+    <!-- CH8 -->
+    <div class="ch-card">
+      <div class="ch-top">
+        <span class="ch-num">CHAPTER 08</span>
+        <span class="ch-freq bg-red" style="border:1px solid rgba(239,68,68,0.3)">★ Must Know</span>
+      </div>
+      <h3>GSM System & Standards</h3>
+      <p class="sub">GSM architecture, channel structure (traffic + control channels), frame structure, and comparisons with CDMA. The broadest chapter — every paper has a GSM question.</p>
+      <div class="ch-topics">
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">GSM architecture</span>
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">Traffic + control channels</span>
+        <span class="topic-tag bg-red" style="border:1px solid rgba(239,68,68,0.3)">GSM frame structure</span>
+        <span class="topic-tag bg-amber" style="border:1px solid rgba(245,158,11,0.3)">BCCH (Broadcast Control Ch.)</span>
+        <span class="topic-tag bg-signal" style="border:1px solid rgba(0,229,160,0.3)">GSM vs CDMA</span>
+        <span class="topic-tag bg-blue" style="border:1px solid rgba(96,165,250,0.3)">CDMA IS-95 / forward channels</span>
+        <span class="topic-tag bg-purple" style="border:1px solid rgba(167,139,250,0.3)">WiMAX / LTE (short notes)</span>
+      </div>
+      <div class="ch-bar-wrap">
+        <div class="ch-bar-label"><span>Exam frequency</span><span class="c-red">Critical</span></div>
+        <div class="ch-bar"><div class="ch-bar-fill" style="width:100%;background:var(--red)"></div></div>
+      </div>
+      <div class="past-qs">
+        <div class="past-qs-label">Recent exam questions</div>
+        <div class="pq-item"><span class="pq-year">2079</span>Briefly explain Broadcast Control Channel of GSM system.</div>
+        <div class="pq-item"><span class="pq-year">2078</span>Explain working of all traffic and control channels used in GSM.</div>
+        <div class="pq-item"><span class="pq-year">2077</span>Draw and explain the frame structure for GSM.</div>
+        <div class="pq-item"><span class="pq-year">2074</span>Explain system architecture of GSM. Mention functions of various blocks.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 14-DAY SCHEDULE -->
+<div class="section-wrap" id="schedule">
+  <div class="section-head">
+    <div class="sh-left">
+      <div class="sh-tag c-signal">Daily Blueprint</div>
+      <h2>14-day study schedule</h2>
+      <p class="sh-desc">Designed for a student 2–3 weeks before the exam. Prioritises high-weight chapters first, then reinforces with past paper practice.</p>
+    </div>
+  </div>
+  <div class="sched-wrap">
+  <div class="sched-outer">
+  <table class="sched-table">
+    <thead>
+      <tr>
+        <th style="width:80px">Day</th>
+        <th>Chapter / Focus</th>
+        <th>Morning (2 hrs)</th>
+        <th>Afternoon (2 hrs)</th>
+        <th>Evening (1 hr)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="day-cell"><div class="day">Day 1</div><div class="daysub">Ch2 start</div></td>
+        <td><span class="badge bg-red" style="border:1px solid rgba(239,68,68,0.3)">Ch2: Cellular Concepts</span></td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Read Ch2 notes</span> Frequency reuse, cluster size N, Q ratio formula</td>
+        <td class="focus-cell"><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Learn Erlang B table</span> Traffic intensity, blocked calls, trunking efficiency</td>
+        <td class="focus-cell"><span class="badge bg-blue" style="border:1px solid rgba(96,165,250,0.3)">Recall test</span> Close notes, solve 2077 Q2</td>
+      </tr>
+      <tr>
+        <td class="day-cell"><div class="day">Day 2</div><div class="daysub">Ch2 deep</div></td>
+        <td><span class="badge bg-red" style="border:1px solid rgba(239,68,68,0.3)">Ch2: Handoff + Cell Planning</span></td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Handoff types</span> Hard, soft, MAHO; practical considerations</td>
+        <td class="focus-cell"><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Cell splitting + sectoring</span> When and why; microcell zones</td>
+        <td class="focus-cell"><span class="badge bg-blue" style="border:1px solid rgba(96,165,250,0.3)">Past paper</span> Solve all Ch2 numericals from 2073–2079</td>
+      </tr>
+      <tr>
+        <td class="day-cell"><div class="day">Day 3</div><div class="daysub">Ch3 part 1</div></td>
+        <td><span class="badge bg-red" style="border:1px solid rgba(239,68,68,0.3)">Ch3: Propagation Models</span></td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Free-space + two-ray model</span> Derivations, far-field distance formula</td>
+        <td class="focus-cell"><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Okumura + Hata model</span> Formulas, conditions, numerical solving</td>
+        <td class="focus-cell"><span class="badge bg-blue" style="border:1px solid rgba(96,165,250,0.3)">Feynman test</span> Explain Hata model out loud without notes</td>
+      </tr>
+      <tr>
+        <td class="day-cell"><div class="day">Day 4</div><div class="daysub">Ch3 part 2</div></td>
+        <td><span class="badge bg-red" style="border:1px solid rgba(239,68,68,0.3)">Ch3: Fading + Coherence</span></td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Small-scale fading</span> Factors, types, Rayleigh vs Rician distributions</td>
+        <td class="focus-cell"><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Coherence BW + Time</span> Delay spread, Doppler spread, 4 fading categories</td>
+        <td class="focus-cell"><span class="badge bg-blue" style="border:1px solid rgba(96,165,250,0.3)">Numericals</span> Delay spread, rms, coherence BW from 2071 Magh</td>
+      </tr>
+      <tr>
+        <td class="day-cell"><div class="day">Day 5</div><div class="daysub">Ch7 core</div></td>
+        <td><span class="badge bg-red" style="border:1px solid rgba(239,68,68,0.3)">Ch7: Multiple Access</span></td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">FDMA + TDMA</span> Comparison table, advantages/disadvantages, frame efficiency</td>
+        <td class="focus-cell"><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">CDMA + FHMA</span> Encoding/decoding, direct sequence, frequency hopping</td>
+        <td class="focus-cell"><span class="badge bg-blue" style="border:1px solid rgba(96,165,250,0.3)">Must solve</span> FDMA channel calculation (12.8 MHz / 30 kHz problem)</td>
+      </tr>
+      <tr>
+        <td class="day-cell"><div class="day">Day 6</div><div class="daysub">Ch8 core</div></td>
+        <td><span class="badge bg-red" style="border:1px solid rgba(239,68,68,0.3)">Ch8: GSM System</span></td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">GSM architecture</span> BTS, BSC, MSC, HLR, VLR, AuC, EIR — functions of each</td>
+        <td class="focus-cell"><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">GSM channels</span> TCH, BCCH, PCH, RACH, SDCCH, SACCH — each one's purpose</td>
+        <td class="focus-cell"><span class="badge bg-blue" style="border:1px solid rgba(96,165,250,0.3)">Blank recall</span> Draw GSM architecture from memory</td>
+      </tr>
+      <tr>
+        <td class="day-cell"><div class="day">Day 7</div><div class="daysub">Ch8 deep + Review</div></td>
+        <td><span class="badge bg-red" style="border:1px solid rgba(239,68,68,0.3)">Ch8: Frame Structure + GSM vs CDMA</span></td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">GSM frame structure</span> Superframe, multiframe, frame, timeslot — TDMA frame efficiency</td>
+        <td class="focus-cell"><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Review Ch2, Ch3, Ch7</span> Revisit flashcards. Mark weak areas.</td>
+        <td class="focus-cell"><span class="badge bg-purple" style="border:1px solid rgba(167,139,250,0.3)">Rest + light review</span> Only your summary notes</td>
+      </tr>
+      <tr>
+        <td class="day-cell"><div class="day">Day 8</div><div class="daysub">Ch4</div></td>
+        <td><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Ch4: Modulation</span></td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">QPSK family</span> QPSK, OQPSK, π/4-QPSK — tx/rx block diagrams</td>
+        <td class="focus-cell"><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">OFDM + MSK/GMSK</span> OFDM transmitter block diagram, cyclic prefix, orthogonality</td>
+        <td class="focus-cell"><span class="badge bg-blue" style="border:1px solid rgba(96,165,250,0.3)">Flashcards</span> All modulation block diagrams from memory</td>
+      </tr>
+      <tr>
+        <td class="day-cell"><div class="day">Day 9</div><div class="daysub">Ch5</div></td>
+        <td><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Ch5: Equalization & Diversity</span></td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Adaptive equalization</span> LMS, RLS, MLSE — training vs tracking mode</td>
+        <td class="focus-cell"><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Diversity + RAKE</span> Space/time/freq diversity, MRC/EGC/SC combining, M-branch RAKE</td>
+        <td class="focus-cell"><span class="badge bg-blue" style="border:1px solid rgba(96,165,250,0.3)">MSE derivation</span> Practice the MSE weight derivation by hand</td>
+      </tr>
+      <tr>
+        <td class="day-cell"><div class="day">Day 10</div><div class="daysub">Ch1 + Ch6</div></td>
+        <td><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Ch1: Generations + Ch6: Speech</span></td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">1G→5G revision</span> Create a concise comparison table for each generation</td>
+        <td class="focus-cell"><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Vocoder + LPC</span> Speech characteristics, formant vocoder, Hadamard code construction</td>
+        <td class="focus-cell"><span class="badge bg-blue" style="border:1px solid rgba(96,165,250,0.3)">Blank recall test</span> Write out 1G–5G table and LPC block from memory</td>
+      </tr>
+      <tr>
+        <td class="day-cell"><div class="day">Day 11</div><div class="daysub">Past Paper 1</div></td>
+        <td><span class="badge bg-purple" style="border:1px solid rgba(167,139,250,0.3)">Full paper simulation — 2079</span></td>
+        <td class="focus-cell"><span class="badge bg-red" style="border:1px solid rgba(239,68,68,0.3)">Timed exam (3 hrs)</span> Complete 2079 Chaitra paper under real conditions</td>
+        <td class="focus-cell"><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Self-marking</span> Mark your answers, identify which questions you dropped marks on</td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Gap study</span> Re-study only topics where you lost marks</td>
+      </tr>
+      <tr>
+        <td class="day-cell"><div class="day">Day 12</div><div class="daysub">Past Paper 2</div></td>
+        <td><span class="badge bg-purple" style="border:1px solid rgba(167,139,250,0.3)">Full paper simulation — 2078</span></td>
+        <td class="focus-cell"><span class="badge bg-red" style="border:1px solid rgba(239,68,68,0.3)">Timed exam (3 hrs)</span> Complete 2078 Chaitra paper. Strict time discipline.</td>
+        <td class="focus-cell"><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Error analysis</span> Categorize: careless mistake vs genuine knowledge gap</td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Formula review</span> Re-check all key formulas</td>
+      </tr>
+      <tr>
+        <td class="day-cell"><div class="day">Day 13</div><div class="daysub">Consolidation</div></td>
+        <td><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Weak areas + Short notes prep</span></td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Your weakest 3 topics</span> Re-study anything from error logs</td>
+        <td class="focus-cell"><span class="badge bg-amber" style="border:1px solid rgba(245,158,11,0.3)">Short notes answers</span> Prepare concise answers for WiMAX, LTE, Viterbi, regulatory issues</td>
+        <td class="focus-cell"><span class="badge bg-blue" style="border:1px solid rgba(96,165,250,0.3)">Flashcard final pass</span> All key definitions and formulas</td>
+      </tr>
+      <tr>
+        <td class="day-cell"><div class="day">Day 14</div><div class="daysub">Final day</div></td>
+        <td><span class="badge bg-purple" style="border:1px solid rgba(167,139,250,0.3)">Light review + Rest</span></td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Summary notes only</span> No new learning. Read your own summaries.</td>
+        <td class="focus-cell"><span class="badge bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Walk + eat well</span> Physical activity improves memory consolidation — seriously.</td>
+        <td class="focus-cell"><span class="badge bg-blue" style="border:1px solid rgba(96,165,250,0.3)">Sleep by 10 PM</span> 8 hours sleep is worth more than 4 hours of cramming.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  </div>
+</div>
+
+<!-- IMPORTANT QUESTIONS -->
+<div class="section-wrap" id="important">
+  <div class="section-head">
+    <div class="sh-left">
+      <div class="sh-tag c-amber">Exam Intelligence</div>
+      <h2>High-probability questions</h2>
+      <p class="sh-desc">Questions that recur across multiple years. ★★★ = appeared 3+ times. These are almost guaranteed.</p>
+    </div>
+  </div>
+
+  <div class="iq-section">
+    <div class="iq-header">
+      <span style="color:var(--red);font-size:1rem;">●</span>
+      <h3>Chapter 2 — Cellular Concepts (High-value numericals)</h3>
+    </div>
+    <div class="iq-body">
+      <div class="iq-item"><span class="iq-stars">★★★</span><span class="iq-mark bg-red" style="border:1px solid rgba(239,68,68,0.3)">[5 marks]</span>Erlang B calculation: Given cells, channels per cell, users' call habits — find number of supportable users and market penetration. <strong style="color:var(--text)">Use Erlang B table provided in paper.</strong></div>
+      <div class="iq-item"><span class="iq-stars">★★★</span><span class="iq-mark bg-red" style="border:1px solid rgba(239,68,68,0.3)">[4 marks]</span>Prove/derive the co-channel reuse ratio Q = √(3N) for hexagonal geometry.</div>
+      <div class="iq-item"><span class="iq-stars">★★</span><span class="iq-mark bg-amber" style="border:1px solid rgba(245,158,11,0.3)">[4 marks]</span>For N=7 reuse pattern, find minimum distance between co-channel cells given cell area.</div>
+      <div class="iq-item"><span class="iq-stars">★★</span><span class="iq-mark bg-amber" style="border:1px solid rgba(245,158,11,0.3)">[4+4 marks]</span>Explain handover process. Compare proper vs improper handoff. Write practical considerations.</div>
+      <div class="iq-item"><span class="iq-stars">★★</span><span class="iq-mark bg-signal" style="border:1px solid rgba(0,229,160,0.3)">[4 marks]</span>Why is minimizing reuse distance important for maximizing spectral efficiency?</div>
+    </div>
+  </div>
+
+  <div class="iq-section">
+    <div class="iq-header">
+      <span style="color:var(--amber);font-size:1rem;">●</span>
+      <h3>Chapter 3 — Radio Propagation (Calculations + Theory)</h3>
+    </div>
+    <div class="iq-body">
+      <div class="iq-item"><span class="iq-stars">★★★</span><span class="iq-mark bg-red" style="border:1px solid rgba(239,68,68,0.3)">[6–8 marks]</span>Apply Hata/Okumura model: given fc, hbs, hms, distance — find path loss or estimate coverage radius.</div>
+      <div class="iq-item"><span class="iq-stars">★★★</span><span class="iq-mark bg-red" style="border:1px solid rgba(239,68,68,0.3)">[8 marks]</span>Free-space propagation problem: Given Pt, fc, distance, antenna gains — find Pr, E-field, rms voltage, power flux density.</div>
+      <div class="iq-item"><span class="iq-stars">★★</span><span class="iq-mark bg-amber" style="border:1px solid rgba(245,158,11,0.3)">[4+3 marks]</span>Advantages of two-ray model over free-space. Derive the two-ray path loss equation.</div>
+      <div class="iq-item"><span class="iq-stars">★★</span><span class="iq-mark bg-amber" style="border:1px solid rgba(245,158,11,0.3)">[2+7 marks]</span>What is frequency selective fading? Explain coherence bandwidth vs delay spread relationship.</div>
+      <div class="iq-item"><span class="iq-stars">★★</span><span class="iq-mark bg-signal" style="border:1px solid rgba(0,229,160,0.3)">[4 marks]</span>RMS delay spread calculation: Given power-delay profile, find delay spread and coherence bandwidth.</div>
+    </div>
+  </div>
+
+  <div class="iq-section">
+    <div class="iq-header">
+      <span style="color:var(--blue);font-size:1rem;">●</span>
+      <h3>Chapter 7 — Multiple Access (The "guaranteed" numerical)</h3>
+    </div>
+    <div class="iq-body">
+      <div class="iq-item"><span class="iq-stars">★★★</span><span class="iq-mark bg-red" style="border:1px solid rgba(239,68,68,0.3)">[4 marks]</span><strong style="color:var(--amber)">GUARANTEED every year:</strong> FDMA channel count. Total BW=12.8 MHz, guard=10 kHz, channel BW=30 kHz. Answer: N = (12.8×10⁶ − 2×10×10³) / 30×10³ = 419 channels.</div>
+      <div class="iq-item"><span class="iq-stars">★★★</span><span class="iq-mark bg-red" style="border:1px solid rgba(239,68,68,0.3)">[8 marks]</span>Illustrate encoding and decoding mechanism of CDMA system. Include spreading codes.</div>
+      <div class="iq-item"><span class="iq-stars">★★</span><span class="iq-mark bg-amber" style="border:1px solid rgba(245,158,11,0.3)">[4+4 marks]</span>Compare FDMA and TDMA. Explain the operation of FHMA with block diagram.</div>
+      <div class="iq-item"><span class="iq-stars">★★</span><span class="iq-mark bg-amber" style="border:1px solid rgba(245,158,11,0.3)">[5 marks]</span>Define spread spectrum. Explain FHSS with necessary relevant diagram.</div>
+      <div class="iq-item"><span class="iq-stars">★★</span><span class="iq-mark bg-signal" style="border:1px solid rgba(0,229,160,0.3)">[5+4 marks]</span>What is near-far effect in CDMA? State all possible near-far mitigation techniques.</div>
+    </div>
+  </div>
+
+  <div class="iq-section">
+    <div class="iq-header">
+      <span style="color:var(--signal);font-size:1rem;">●</span>
+      <h3>Chapter 8 — GSM (Architecture + Channels every year)</h3>
+    </div>
+    <div class="iq-body">
+      <div class="iq-item"><span class="iq-stars">★★★</span><span class="iq-mark bg-red" style="border:1px solid rgba(239,68,68,0.3)">[7–9 marks]</span>Explain all traffic and control channels used in GSM — their names, purpose, and direction.</div>
+      <div class="iq-item"><span class="iq-stars">★★★</span><span class="iq-mark bg-red" style="border:1px solid rgba(239,68,68,0.3)">[4+4 marks]</span>Draw and explain GSM frame structure. Show that TDMA frame efficiency cannot reach 100%.</div>
+      <div class="iq-item"><span class="iq-stars">★★</span><span class="iq-mark bg-amber" style="border:1px solid rgba(245,158,11,0.3)">[5 marks]</span>Briefly explain Broadcast Control Channel (BCCH) of GSM system.</div>
+      <div class="iq-item"><span class="iq-stars">★★</span><span class="iq-mark bg-amber" style="border:1px solid rgba(245,158,11,0.3)">[7 marks]</span>Explain with diagram the system architecture of GSM. Mention functions of each block.</div>
+      <div class="iq-item"><span class="iq-stars">★</span><span class="iq-mark bg-signal" style="border:1px solid rgba(0,229,160,0.3)">[3+5 marks]</span>Compare system architecture of CDMA with LTE. Mention functions of entities.</div>
+    </div>
+  </div>
+
+  <!-- PRIORITY TABLE -->
+  <div style="border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-top:1.5rem;">
+    <div style="background:rgba(255,255,255,0.03);padding:0.9rem 1.4rem;border-bottom:1px solid var(--border);">
+      <h3 style="font-size:0.88rem;font-weight:700;color:var(--text);">Topic Priority Matrix — What to study first</h3>
+    </div>
+    <div style="overflow-x:auto;">
+    <div class="priority-row hd"><div>Topic</div><div>Chapters</div><div>Marks (approx)</div><div>Priority</div></div>
+    <div class="priority-row"><div style="color:var(--text);font-weight:600;">Erlang B + trunking numericals</div><div style="color:var(--muted2);">Ch 2</div><div style="color:var(--muted2);">5–6</div><div><span class="pstatus bg-red" style="border:1px solid rgba(239,68,68,0.3)">Critical</span></div></div>
+    <div class="priority-row"><div style="color:var(--text);font-weight:600;">FDMA channel count numerical</div><div style="color:var(--muted2);">Ch 7</div><div style="color:var(--muted2);">4</div><div><span class="pstatus bg-red" style="border:1px solid rgba(239,68,68,0.3)">Guaranteed</span></div></div>
+    <div class="priority-row"><div style="color:var(--text);font-weight:600;">GSM channels (all TCH/CCH)</div><div style="color:var(--muted2);">Ch 8</div><div style="color:var(--muted2);">7–9</div><div><span class="pstatus bg-red" style="border:1px solid rgba(239,68,68,0.3)">Critical</span></div></div>
+    <div class="priority-row"><div style="color:var(--text);font-weight:600;">Hata model + path loss problem</div><div style="color:var(--muted2);">Ch 3</div><div style="color:var(--muted2);">6–8</div><div><span class="pstatus bg-red" style="border:1px solid rgba(239,68,68,0.3)">Critical</span></div></div>
+    <div class="priority-row"><div style="color:var(--text);font-weight:600;">Cellular generations comparison</div><div style="color:var(--muted2);">Ch 1</div><div style="color:var(--muted2);">4–6</div><div><span class="pstatus bg-amber" style="border:1px solid rgba(245,158,11,0.3)">High</span></div></div>
+    <div class="priority-row"><div style="color:var(--text);font-weight:600;">RAKE receiver block diagram</div><div style="color:var(--muted2);">Ch 5</div><div style="color:var(--muted2);">5–8</div><div><span class="pstatus bg-amber" style="border:1px solid rgba(245,158,11,0.3)">High</span></div></div>
+    <div class="priority-row"><div style="color:var(--text);font-weight:600;">OFDM transmitter block diagram</div><div style="color:var(--muted2);">Ch 4</div><div style="color:var(--muted2);">4–8</div><div><span class="pstatus bg-amber" style="border:1px solid rgba(245,158,11,0.3)">High</span></div></div>
+    <div class="priority-row"><div style="color:var(--text);font-weight:600;">Speech characteristics + LPC/Vocoder</div><div style="color:var(--muted2);">Ch 6</div><div style="color:var(--muted2);">4–6</div><div><span class="pstatus bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Medium</span></div></div>
+    <div class="priority-row"><div style="color:var(--text);font-weight:600;">Hadamard code construction</div><div style="color:var(--muted2);">Ch 6</div><div style="color:var(--muted2);">5–8</div><div><span class="pstatus bg-signal" style="border:1px solid rgba(0,229,160,0.3)">Medium</span></div></div>
+    <div class="priority-row"><div style="color:var(--text);font-weight:600;">Short notes: WiMAX / LTE / Viterbi</div><div style="color:var(--muted2);">Ch 8</div><div style="color:var(--muted2);">3–5</div><div><span class="pstatus" style="background:var(--blue-dim);color:var(--blue);border:1px solid rgba(96,165,250,0.3)">Low-Medium</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- KEY FORMULAS -->
+<div class="section-wrap" id="formulas">
+  <div class="section-head">
+    <div class="sh-left">
+      <div class="sh-tag c-signal">Reference Sheet</div>
+      <h2>Key formulas & definitions</h2>
+      <p class="sh-desc">The most important formulas from all chapters. Memorise these before touching past papers.</p>
+    </div>
+  </div>
+
+  <div style="margin-bottom:1.5rem;">
+    <details>
+      <summary>Chapter 2 — Cellular System Formulas</summary>
+      <div class="detail-body">
+        <ul>
+          <li><strong>Co-channel reuse ratio:</strong> <span class="formula-inline">Q = D/R = √(3N)</span> where N = i² + ij + j²</li>
+          <li><strong>Cluster size:</strong> <span class="formula-inline">N = i² + ij + j²</span> (valid values: 1, 3, 4, 7, 9, 12...)</li>
+          <li><strong>SIR (omni):</strong> <span class="formula-inline">S/I = (√3N)ⁿ / 6</span> where n = path loss exponent</li>
+          <li><strong>Traffic intensity per user:</strong> <span class="formula-inline">A_u = λ · H</span> (call arrival rate × avg call duration in Erlangs)</li>
+          <li><strong>Total offered traffic:</strong> <span class="formula-inline">A = A_u × U</span> (U = number of users)</li>
+          <li><strong>Erlang B (GOS):</strong> Use the Erlang B table provided with the exam (always attached). For N channels, find A such that B% blocking is satisfied.</li>
+          <li><strong>Cell area (hexagonal):</strong> <span class="formula-inline">A_c = 2.598 R²</span> where R is cell radius</li>
+          <li><strong>Min distance between co-channel cells:</strong> <span class="formula-inline">D = R√(3N)</span></li>
+          <li><strong>Market penetration:</strong> (Total supportable users / Area population) × 100%</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Chapter 3 — Propagation Model Formulas</summary>
+      <div class="detail-body">
+        <ul>
+          <li><strong>Free-space path loss:</strong> <span class="formula-inline">Pr = Pt · Gt · Gr · (λ/4πd)²</span></li>
+          <li><strong>Free-space PL in dB:</strong> <span class="formula-inline">PL(dB) = 20log(d) + 20log(fc) + 20log(4π/c)</span></li>
+          <li><strong>Far-field distance:</strong> <span class="formula-inline">d_f = 2D²/λ</span> (D = max antenna dimension)</li>
+          <li><strong>Two-ray model:</strong> <span class="formula-inline">Pr = Pt · Gt · Gr · (ht · hr)² / d⁴</span> (for d >> ht·hr)</li>
+          <li><strong>Hata model (Urban, 150–1500 MHz):</strong> <span class="formula-inline">L₅₀(dB) = 69.55 + 26.16·log(fc) − 13.82·log(hte) − a(hre) + (44.9 − 6.55·log(hte))·log(d)</span></li>
+          <li><strong>Correction factor a(hre) — medium city:</strong> <span class="formula-inline">a(hre) = (1.1·logfc − 0.7)·hre − (1.56·logfc − 0.8) dB</span></li>
+          <li><strong>Correction factor a(hre) — large city (fc ≥ 300 MHz):</strong> <span class="formula-inline">a(hre) = 3.2(log(11.75·hre))² − 4.97 dB</span></li>
+          <li><strong>Suburban Hata:</strong> <span class="formula-inline">L₅₀(suburban) = L₅₀(urban) − 2[log(fc/28)]² − 5.4</span></li>
+          <li><strong>RMS delay spread:</strong> <span class="formula-inline">σ_τ = √(Στ²P(τ) / ΣP(τ) − τ̄²)</span></li>
+          <li><strong>Coherence bandwidth (90%):</strong> <span class="formula-inline">Bc ≈ 1/(50·σ_τ)</span></li>
+          <li><strong>Coherence bandwidth (50%):</strong> <span class="formula-inline">Bc ≈ 1/(5·σ_τ)</span></li>
+          <li><strong>Coherence time:</strong> <span class="formula-inline">Tc ≈ 0.423/fm</span> where fm = v·fc/c (max Doppler freq)</li>
+          <li><strong>Doppler shift:</strong> <span class="formula-inline">fd = (v/λ)·cosθ = v·fc·cosθ/c</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Chapter 7 — Multiple Access Formulas</summary>
+      <div class="detail-body">
+        <ul>
+          <li><strong>FDMA channels:</strong> <span class="formula-inline">N = (B_total − 2·B_guard) / B_channel</span></li>
+          <li><strong>TDMA frame efficiency:</strong> <span class="formula-inline">η = (1 − b_overhead/b_frame) × 100%</span></li>
+          <li><strong>GSM TDMA frame efficiency example:</strong> Total frame = 156.25 bits, overhead = 6+8.25+26 = 40.25 bits → η ≈ 74%</li>
+          <li><strong>CDMA spreading:</strong> Chip rate = Rb × processing gain. User signal XOR with code. Despreading = correlate with same code.</li>
+          <li><strong>Processing gain:</strong> <span class="formula-inline">PG = BW_spread / BW_signal = Rc/Rb</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Chapter 4 — Modulation Key Points</summary>
+      <div class="detail-body">
+        <ul>
+          <li><strong>QPSK:</strong> 2 bits/symbol, 4 phase states (0°, 90°, 180°, 270°). I and Q channels modulated simultaneously.</li>
+          <li><strong>OQPSK:</strong> Like QPSK but Q channel delayed by T/2. Avoids 180° phase transitions → reduces envelope fluctuation.</li>
+          <li><strong>π/4-QPSK:</strong> Rotates constellation by 45° each symbol. Max phase shift = 135°. Used in IS-136 TDMA.</li>
+          <li><strong>MSK:</strong> Continuous phase FSK. Modulation index h=0.5. Spectral efficiency better than BFSK.</li>
+          <li><strong>GMSK:</strong> MSK with Gaussian pre-filter. Tighter spectrum. Used in GSM (BT=0.3).</li>
+          <li><strong>OFDM key principle:</strong> Divides wideband channel into N narrowband orthogonal subcarriers. Cyclic prefix prevents ISI. IFFT at transmitter, FFT at receiver.</li>
+          <li><strong>OFDM advantage:</strong> Resistant to multipath. Spectral efficient. Simple equalization in frequency domain.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Chapter 8 — GSM Channels Quick Reference</summary>
+      <div class="detail-body">
+        <ul>
+          <li><strong>Traffic Channel (TCH):</strong> Carries voice/data for actual calls (Full-rate: TCH/F, Half-rate: TCH/H)</li>
+          <li><strong>BCCH (Broadcast Control Ch.):</strong> Downlink only. Broadcasts cell system info (frequencies, timing, identity). Always transmitted at constant power.</li>
+          <li><strong>RACH (Random Access Ch.):</strong> Uplink only. MS requests connection to network.</li>
+          <li><strong>PCH (Paging Ch.):</strong> Downlink only. Network pages MS for incoming calls.</li>
+          <li><strong>AGCH (Access Grant Ch.):</strong> Downlink. Assigns SDCCH in response to RACH.</li>
+          <li><strong>SDCCH (Stand-alone Dedicated CCH):</strong> Two-way. Used for call setup before TCH assigned.</li>
+          <li><strong>SACCH (Slow ACCH):</strong> Two-way. Carries measurement reports and control. Associated with TCH.</li>
+          <li><strong>FACCH (Fast ACCH):</strong> Steals frames from TCH. Used for handoff signalling.</li>
+          <li><strong>GSM Frame structure:</strong> 1 frame = 8 timeslots. 26-frame multiframe (voice) or 51-frame multiframe (control). 1 superframe = 1326 frames.</li>
+          <li><strong>GSM Architecture blocks:</strong> MS → Um → BTS → Abis → BSC → A → MSC → PSTN. HLR, VLR, AuC, EIR are in NSS.</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="formula-grid">
+    <div class="formula-card">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--amber)"></div>
+      <h4>FDMA Channel Count (Guaranteed Numerical)</h4>
+      <div class="formula-block">N = (B_total − 2×B_guard) / B_channel<br><br>Example: (12.8 MHz − 2×10 kHz) / 30 kHz<br>= (12,800,000 − 20,000) / 30,000<br>= 12,780,000 / 30,000 = <strong>426 channels</strong></div>
+      <div class="formula-note">This exact problem appears in 2079, 2078, 2077, 2075 and earlier papers. Memorise the substitution.</div>
+    </div>
+    <div class="formula-card">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--red)"></div>
+      <h4>Hata Model — Urban Path Loss</h4>
+      <div class="formula-block">L₅₀ = 69.55 + 26.16·log(fc)<br>    − 13.82·log(hte) − a(hre)<br>    + (44.9 − 6.55·log(hte))·log(d)</div>
+      <div class="formula-note">fc in MHz, hte and hre in meters, d in km. Remember to apply the correct a(hre) correction factor for city size.</div>
+    </div>
+    <div class="formula-card">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--signal)"></div>
+      <h4>Erlang B Traffic Formula</h4>
+      <div class="formula-block">Traffic per user: A_u = λ × H<br>Total traffic:   A = A_u × U<br>GOS (Erlang B): use table in paper<br><br>Market penetration = Users supported / Total population</div>
+      <div class="formula-note">Erlang B table is always attached to the exam. Find N (channels) from cells×channels/cell, look up A for given blocking %.</div>
+    </div>
+    <div class="formula-card">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--blue)"></div>
+      <h4>Coherence Bandwidth & Delay Spread</h4>
+      <div class="formula-block">σ_τ = √(Στ²P(τ)/ΣP(τ) − [ΣτP(τ)/ΣP(τ)]²)<br><br>Bc ≈ 1/(50·σ_τ)  [90% coherence]<br>Bc ≈ 1/(5·σ_τ)   [50% coherence]</div>
+      <div class="formula-note">If Bc >> Bs (signal BW) → flat fading. If Bc < Bs → frequency selective fading. Compare with system BW.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SELF TESTING -->
+<div class="section-wrap" id="testing">
+  <div class="section-head">
+    <div class="sh-left">
+      <div class="sh-tag c-purple">Active Recall</div>
+      <h2>How to test yourself for this exam</h2>
+      <p class="sh-desc">EX 751 tests both numericals and conceptual understanding. These testing methods are designed specifically for this subject.</p>
+    </div>
+  </div>
+  <div class="testing-grid">
+    <div class="test-card">
+      <div class="tc-icon">📐</div>
+      <h4>Solve numericals without looking</h4>
+      <p>Pick any calculation from past papers. Work through it with formula sheet only — no worked examples. Then verify your method.</p>
+      <ul class="test-steps">
+        <li>Priority: Erlang B, FDMA calc, Hata model, free-space propagation</li>
+        <li>Write out each step explicitly — marks are awarded for method</li>
+        <li>Check final units match expected output</li>
+        <li>Time yourself: 10–15 min per 5-mark problem</li>
+      </ul>
+    </div>
+    <div class="test-card">
+      <div class="tc-icon">📊</div>
+      <h4>Draw block diagrams from memory</h4>
+      <p>Most diagram questions carry 6–8 marks. You must draw them correctly from memory. No partial credit for incomplete diagrams.</p>
+      <ul class="test-steps">
+        <li>GSM architecture with all block names + interfaces</li>
+        <li>OFDM transmitter and receiver block diagrams</li>
+        <li>RAKE receiver (M-branch) block diagram</li>
+        <li>CDMA encoding/decoding process diagram</li>
+      </ul>
+    </div>
+    <div class="test-card">
+      <div class="tc-icon">📋</div>
+      <h4>Write comparison tables</h4>
+      <p>Many questions ask you to "compare" two systems. A well-structured table earns full marks. Practice writing these quickly.</p>
+      <ul class="test-steps">
+        <li>FDMA vs TDMA vs CDMA — 3 columns minimum</li>
+        <li>1G vs 2G vs 3G vs 4G vs 5G — key parameters</li>
+        <li>Rayleigh vs Rician fading distributions</li>
+        <li>GSM vs CDMA — architecture and standards</li>
+      </ul>
+    </div>
+    <div class="test-card">
+      <div class="tc-icon">🗣️</div>
+      <h4>Explain concepts out loud (Feynman method)</h4>
+      <p>Pick any theoretical concept and explain it to an imaginary student. If you stumble, that's exactly what you need to re-study.</p>
+      <ul class="test-steps">
+        <li>"Why does OFDM need a cyclic prefix?"</li>
+        <li>"How does CDMA separate users in the same frequency?"</li>
+        <li>"What exactly happens during a handoff in GSM?"</li>
+        <li>"Why is the coherence bandwidth related to delay spread?"</li>
+      </ul>
+    </div>
+    <div class="test-card">
+      <div class="tc-icon">📄</div>
+      <h4>Full paper simulation</h4>
+      <p>Do complete past papers strictly timed. 80 marks in 3 hours = 2.25 minutes per mark. Know your pacing before exam day.</p>
+      <ul class="test-steps">
+        <li>Start with questions you know best (build confidence)</li>
+        <li>Allocate 15–20 min per 8-mark question</li>
+        <li>Never skip a question entirely — always write something</li>
+        <li>Start with 2079, then 2078, then 2077 paper</li>
+      </ul>
+    </div>
+    <div class="test-card">
+      <div class="tc-icon">❌</div>
+      <h4>Build your error log</h4>
+      <p>Every mistake is information. Keep a running list of every question you got wrong or incomplete. Review it daily in the final week.</p>
+      <ul class="test-steps">
+        <li>Write the topic, the question, and what you got wrong</li>
+        <li>Note whether it was a concept gap or a careless error</li>
+        <li>Re-attempt the same question 48 hours later</li>
+        <li>Track your confidence per chapter (1–5 scale)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- TIPS -->
+<div class="section-wrap" id="tips">
+  <div class="section-head">
+    <div class="sh-left">
+      <div class="sh-tag c-signal">Exam Strategy</div>
+      <h2>TU IOE exam-specific tips</h2>
+      <p class="sh-desc">Based on how TU IOE exams are marked and structured. These apply specifically to EX 751.</p>
+    </div>
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-n">1</div>
+      <h4>Always show your working</h4>
+      <p>TU IOE examiners give marks for method, not just the final answer. Even if your answer is wrong, correct working can earn 3 out of 5 marks. Never skip steps.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-n">2</div>
+      <h4>The FDMA problem is a gift</h4>
+      <p>The FDMA channel count numerical (12.8 MHz / 30 kHz) has appeared in almost every exam since 2073. It is a free 4 marks if you memorise the formula and substitution.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-n">3</div>
+      <h4>Attempt ALL questions</h4>
+      <p>The paper says "Attempt All Questions." There are no optional questions. Even for questions you're unsure about, write what you know — partial credit adds up to passing.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-n">4</div>
+      <h4>The Erlang B table is given</h4>
+      <p>The Erlang B / Erlang C table is always attached to the exam paper. You don't need to memorise the formula — just know how to read the table and identify the correct row and column.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-n">5</div>
+      <h4>Label ALL diagrams</h4>
+      <p>Block diagrams without labels get partial or no credit. Every block, signal line, and interface in GSM architecture, OFDM, RAKE receiver must be labeled clearly.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-n">6</div>
+      <h4>Short notes format</h4>
+      <p>Short notes (2×3 or 2×4 marks) typically need: definition, key features, block diagram or equation, application. 4 bullets per note = safe marks.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-n">7</div>
+      <h4>GSM and Ch2 carry the most marks</h4>
+      <p>In every paper examined, Ch2 (cellular concepts) and Ch8 (GSM) together carry 20–26 marks. If you master only two chapters, make it these. They are also predictable.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-n">8</div>
+      <h4>State assumptions clearly</h4>
+      <p>The paper says "Assume suitable data if necessary." If a question is missing a parameter (e.g. path loss exponent), state your assumption and proceed. Examiners expect this.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="max-width:800px;margin:0 auto;">
+    <strong>EX 751 — Wireless Communication</strong> · Tribhuvan University, Institute of Engineering<br>
+    <span style="font-size:0.78rem;margin-top:6px;display:block;">Study plan built from analysis of TU IOE past papers (2070–2079 Bhadra/Chaitra). Chapter weights based on actual exam mark distributions. Formulas verified against SSD Sir and SST Sir notes.</span>
+    <div style="margin-top:1rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="#chapters" style="color:var(--signal);text-decoration:none;font-size:0.8rem;">↑ Chapters</a>
+      <a href="#schedule" style="color:var(--signal);text-decoration:none;font-size:0.8rem;">↑ Schedule</a>
+      <a href="#important" style="color:var(--signal);text-decoration:none;font-size:0.8rem;">↑ Important Qs</a>
+      <a href="#formulas" style="color:var(--signal);text-decoration:none;font-size:0.8rem;">↑ Formulas</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
